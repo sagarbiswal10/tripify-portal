@@ -8,19 +8,19 @@ export const Offers = () => {
       title: "Early Bird Special",
       description: "Book 60 days in advance and get 25% off on international flights",
       discount: "25% OFF",
-      image: "https://source.unsplash.com/800x600/?flight"
+      image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&h=600&fit=crop"
     },
     {
       title: "Weekend Getaway",
       description: "Special hotel rates for weekend stays. Limited time offer!",
       discount: "15% OFF",
-      image: "https://source.unsplash.com/800x600/?hotel"
+      image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&h=600&fit=crop"
     },
     {
       title: "Family Package",
       description: "Special discounts for family bookings of 4 or more",
       discount: "20% OFF",
-      image: "https://source.unsplash.com/800x600/?family,vacation"
+      image: "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=800&h=600&fit=crop"
     }
   ];
 
@@ -35,11 +35,11 @@ export const Offers = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {offers.map((offer, index) => (
             <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
-              <div className="relative h-48">
+              <div className="relative h-64">
                 <img 
                   src={offer.image} 
                   alt={offer.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full flex items-center gap-1">
                   <Percent className="h-4 w-4" />
@@ -51,7 +51,7 @@ export const Offers = () => {
                 <CardDescription>{offer.description}</CardDescription>
               </CardHeader>
               <CardContent>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full hover:bg-blue-50">
                   Book Now
                 </Button>
               </CardContent>
