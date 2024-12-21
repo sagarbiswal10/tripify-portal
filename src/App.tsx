@@ -3,36 +3,21 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
 import Index from "./pages/Index";
-import SignIn from "./pages/SignIn";
-import MyBookings from "./pages/MyBookings";
-import FlightResults from "./pages/FlightResults";
-import TrainResults from "./pages/TrainResults";
-import BusResults from "./pages/BusResults";
-import HotelResults from "./pages/HotelResults";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/my-bookings" element={<MyBookings />} />
-            <Route path="/flights/search" element={<FlightResults />} />
-            <Route path="/trains/search" element={<TrainResults />} />
-            <Route path="/buses/search" element={<BusResults />} />
-            <Route path="/hotels/search" element={<HotelResults />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </AuthProvider>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
   </QueryClientProvider>
 );
 
