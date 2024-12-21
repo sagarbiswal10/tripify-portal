@@ -5,10 +5,10 @@ import { Navbar } from "@/components/Navbar";
 
 const TrainResults = () => {
   const { toast } = useToast();
-  const { isAuthenticated } = useAuth();
+  const { user } = useAuth();
 
   const handleBooking = () => {
-    if (!isAuthenticated) {
+    if (!user) {
       toast({
         title: "Authentication Required",
         description: "Please sign in to book tickets",
