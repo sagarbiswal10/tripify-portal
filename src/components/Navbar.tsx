@@ -14,9 +14,9 @@ export const Navbar = () => {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-gray-700 hover:text-blue-600">Flights</a>
-            <a href="#" className="text-gray-700 hover:text-blue-600">Hotels</a>
-            <a href="#" className="text-gray-700 hover:text-blue-600">Cars</a>
+            <a href="#" className="text-gray-700 hover:text-blue-600">Home</a>
+            <a href="#about" className="text-gray-700 hover:text-blue-600">About Us</a>
+            <a href="#contact" className="text-gray-700 hover:text-blue-600">Contact Us</a>
             <a href="#offers" className="text-gray-700 hover:text-blue-600">Offers</a>
             <Button variant="default">Sign In</Button>
           </div>
@@ -31,9 +31,9 @@ export const Navbar = () => {
         {isOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Flights</a>
-              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Hotels</a>
-              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Cars</a>
+              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Home</a>
+              <a href="#about" className="block px-3 py-2 text-gray-700 hover:text-blue-600">About Us</a>
+              <a href="#contact" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Contact Us</a>
               <a href="#offers" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Offers</a>
               <Button variant="default" className="w-full mt-2">Sign In</Button>
             </div>
