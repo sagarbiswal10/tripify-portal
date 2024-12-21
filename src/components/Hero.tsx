@@ -1,8 +1,9 @@
-import { Plane, Train, Bus, Building, Calendar, MapPin } from "lucide-react";
+import { Plane, Train, Bus, Building } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState, useEffect } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useNavigate } from "react-router-dom";
 
 const backgroundImages = [
   "https://images.unsplash.com/photo-1500673922987-e212871fec22",
@@ -14,6 +15,7 @@ const backgroundImages = [
 export const Hero = () => {
   const [searchType, setSearchType] = useState<'flights' | 'trains' | 'buses' | 'hotels'>('flights');
   const [currentBgIndex, setCurrentBgIndex] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,6 +23,11 @@ export const Hero = () => {
     }, 5000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    navigate(`/${searchType}/search`);
+  };
 
   return (
     <div 
@@ -40,60 +47,89 @@ export const Hero = () => {
         </div>
 
         <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-xl p-6 max-w-4xl mx-auto">
-          <div className="flex gap-4 mb-6 overflow-x-auto">
-            <Button
-              variant={searchType === 'flights' ? 'default' : 'outline'}
-              onClick={() => setSearchType('flights')}
-              className="flex items-center gap-2 whitespace-nowrap"
-            >
-              <Plane className="h-4 w-4" />
-              Flights
-            </Button>
-            <Button
-              variant={searchType === 'trains' ? 'default' : 'outline'}
-              onClick={() => setSearchType('trains')}
-              className="flex items-center gap-2 whitespace-nowrap"
-            >
-              <Train className="h-4 w-4" />
-              Trains
-            </Button>
-            <Button
-              variant={searchType === 'buses' ? 'default' : 'outline'}
-              onClick={() => setSearchType('buses')}
-              className="flex items-center gap-2 whitespace-nowrap"
-            >
-              <Bus className="h-4 w-4" />
-              Buses
-            </Button>
-            <Button
-              variant={searchType === 'hotels' ? 'default' : 'outline'}
-              onClick={() => setSearchType('hotels')}
-              className="flex items-center gap-2 whitespace-nowrap"
-            >
-              <Building className="h-4 w-4" />
-              Hotels
-            </Button>
-          </div>
+          <form onSubmit={handleSearch}>
+            <div className="flex gap-4 mb-6 overflow-x-auto">
+              <Button
+                variant={searchType === 'flights' ? 'default' : 'outline'}
+                onClick={() => setSearchType('flights')}
+                className="flex items-center gap-2 whitespace-nowrap"
+              >
+                <Plane className="h-4 w-4" />
+                Flights
+              </Button>
+              <Button
+                variant={searchType === 'trains' ? 'default' : 'outline'}
+                onClick={() => setSearchType('trains')}
+                className="flex items-center gap-2 whitespace-nowrap"
+              >
+                <Train className="h-4 w-4" />
+                Trains
+              </Button>
+              <Button
+                variant={searchType === 'buses' ? 'default' : 'outline'}
+                onClick={() => setSearchType('buses')}
+                className="flex items-center gap-2 whitespace-nowrap"
+              >
+                <Bus className="h-4 w-4" />
+                Buses
+              </Button>
+              <Button
+                variant={searchType === 'hotels' ? 'default' : 'outline'}
+                onClick={() => setSearchType('hotels')}
+                className="flex items-center gap-2 whitespace-nowrap"
+              >
+                <Building className="h-4 w-4" />
+                Hotels
+              </Button>
+            </div>
 
-          <div className="space-y-4">
-            {searchType !== 'hotels' ? (
-              <>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-gray-700 mb-1">From</label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder={`Select departure ${searchType === 'flights' ? 'city' : 'station'}`} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="delhi">New Delhi</SelectItem>
-                        <SelectItem value="mumbai">Mumbai</SelectItem>
-                        <SelectItem value="bangalore">Bangalore</SelectItem>
-                      </SelectContent>
-                    </Select>
+            <div className="space-y-4">
+              {searchType !== 'hotels' ? (
+                <>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-gray-700 mb-1">From</label>
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder={`Select departure ${searchType === 'flights' ? 'city' : 'station'}`} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="delhi">New Delhi</SelectItem>
+                          <SelectItem value="mumbai">Mumbai</SelectItem>
+                          <SelectItem value="bangalore">Bangalore</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <label className="block text-gray-700 mb-1">To</label>
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select destination" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="paris">Paris</SelectItem>
+                          <SelectItem value="newyork">New York</SelectItem>
+                          <SelectItem value="tokyo">Tokyo</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-gray-700 mb-1">Departure Date</label>
+                      <Input type="date" className="w-full" />
+                    </div>
+                    <div>
+                      <label className="block text-gray-700 mb-1">Return Date</label>
+                      <Input type="date" className="w-full" />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
                   <div>
-                    <label className="block text-gray-700 mb-1">To</label>
+                    <label className="block text-gray-700 mb-1">Destination</label>
                     <Select>
                       <SelectTrigger>
                         <SelectValue placeholder="Select destination" />
@@ -105,69 +141,42 @@ export const Hero = () => {
                       </SelectContent>
                     </Select>
                   </div>
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-gray-700 mb-1">Departure Date</label>
-                    <Input type="date" className="w-full" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-gray-700 mb-1">Check-in Date</label>
+                      <Input type="date" className="w-full" />
+                    </div>
+                    <div>
+                      <label className="block text-gray-700 mb-1">Check-out Date</label>
+                      <Input type="date" className="w-full" />
+                    </div>
                   </div>
-                  <div>
-                    <label className="block text-gray-700 mb-1">Return Date</label>
-                    <Input type="date" className="w-full" />
-                  </div>
-                </div>
-              </>
-            ) : (
-              <>
-                <div>
-                  <label className="block text-gray-700 mb-1">Destination</label>
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select destination" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="paris">Paris</SelectItem>
-                      <SelectItem value="newyork">New York</SelectItem>
-                      <SelectItem value="tokyo">Tokyo</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                </>
+              )}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-gray-700 mb-1">Check-in Date</label>
-                    <Input type="date" className="w-full" />
-                  </div>
-                  <div>
-                    <label className="block text-gray-700 mb-1">Check-out Date</label>
-                    <Input type="date" className="w-full" />
-                  </div>
-                </div>
-              </>
-            )}
-
-            <div>
-              <label className="block text-gray-700 mb-1">
-                {searchType === 'hotels' ? 'Guests' : 'Passengers'}
-              </label>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder={`Select number of ${searchType === 'hotels' ? 'guests' : 'passengers'}`} />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="1">1 Person</SelectItem>
-                  <SelectItem value="2">2 People</SelectItem>
-                  <SelectItem value="3">3 People</SelectItem>
-                  <SelectItem value="4">4+ People</SelectItem>
-                </SelectContent>
-              </Select>
+              <div>
+                <label className="block text-gray-700 mb-1">
+                  {searchType === 'hotels' ? 'Guests' : 'Passengers'}
+                </label>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder={`Select number of ${searchType === 'hotels' ? 'guests' : 'passengers'}`} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="1">1 Person</SelectItem>
+                    <SelectItem value="2">2 People</SelectItem>
+                    <SelectItem value="3">3 People</SelectItem>
+                    <SelectItem value="4">4+ People</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-          </div>
 
-          <Button className="w-full mt-6 bg-blue-600 hover:bg-blue-700">
-            Search
-          </Button>
+            <Button type="submit" className="w-full mt-6 bg-blue-600 hover:bg-blue-700">
+              Search
+            </Button>
+          </form>
         </div>
       </div>
     </div>
